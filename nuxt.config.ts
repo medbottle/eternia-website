@@ -42,7 +42,7 @@ export default defineNuxtConfig({
 				{ property: 'og:type', content: 'website' },
 				{
 					property: 'og:image',
-					content: '/og.jpg',
+					content: '/og.png',
 				},
 				{ name: 'twitter:card', content: 'summary_large_image' },
 			],
