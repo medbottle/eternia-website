@@ -1,14 +1,16 @@
 <template>
 	<header class="intro">
-		<div class="relative z-30 flex flex-col items-center text-center px-4">
-			<img
-				src="~/assets/img/meranthe_logo.png"
-				alt="Chronicles of Meranthe"
-				class="logo mx-auto w-full max-w-[45.36rem] sm:max-w-[51.84rem] md:max-w-[58.32rem]"
-				width="1375"
-				height="688"
-			/>
-			<div class="mt-1">
+		<div class="hero-content relative z-30 flex h-full w-full flex-col">
+			<div class="flex flex-1 items-center justify-center px-4">
+				<img
+					src="~/assets/img/meranthe_logo.png"
+					alt="Chronicles of Meranthe"
+					class="logo mx-auto w-full max-w-[45.36rem] sm:max-w-[51.84rem] md:max-w-[58.32rem]"
+					width="1375"
+					height="688"
+				/>
+			</div>
+			<div class="flex justify-center px-4 pb-8">
 				<NuxtLink to="/play/how-to" class="cta">Play Now</NuxtLink>
 			</div>
 		</div>
@@ -63,8 +65,8 @@ const toggleVideo = () => {
 
 <style lang="scss" scoped>
 .intro {
-	@apply relative flex items-center justify-center overflow-hidden border-b
-		border-tertiary border-opacity-10 bg-secondary bg-opacity-30;
+	@apply relative flex overflow-hidden border-b border-tertiary
+		border-opacity-10 bg-secondary bg-opacity-30;
 
 	background-image: url('~/assets/img/video-poster.webp');
 	background-repeat: no-repeat;
@@ -102,7 +104,8 @@ const toggleVideo = () => {
 }
 
 .cta {
-	@apply text-xl w-64 py-4 rounded-b-none;
+	@apply flex w-[32rem] max-w-full items-center justify-center py-8 text-center
+		text-4xl rounded-b-none;
 
 	&:after {
 		content: '';
