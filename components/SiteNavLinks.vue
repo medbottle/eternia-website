@@ -1,0 +1,194 @@
+<template>
+	<div
+		class="nav-links flex-grow"
+		:class="{ 'nav-links--vertical': layout === 'vertical' }"
+	>
+		<div class="page-links flex">
+			<NuxtLink to="/">About</NuxtLink>
+			<NuxtLink to="/play/how-to">How To Play</NuxtLink>
+			<NuxtLink to="/media">Media</NuxtLink>
+		</div>
+		<div class="social-links ml-auto pl-4 items-center flex gap-2">
+			<a
+				href="https://discord.com/invite/meranthe?utm_source=website"
+				target="_blank"
+				rel="external"
+				aria-label="Discord"
+			>
+				<Icon name="fa6-brands:discord" />
+			</a>
+			<a
+				href="https://chronicles-of-eternia.com/forum/index.php"
+				target="_blank"
+				rel="external"
+				aria-label="Forums"
+			>
+				<Icon name="fa6-solid:comments" />
+			</a>
+			<a
+				href="https://chronicles-of-eternia.com/wiki/Main_Page"
+				target="_blank"
+				rel="external"
+				aria-label="Wiki"
+			>
+				<Icon name="fa6-solid:book" />
+			</a>
+		</div>
+	</div>
+</template>
+
+<script setup>
+defineProps({
+	layout: {
+		type: String,
+		required: false,
+		default: 'horizontal',
+	},
+})
+
+const route = useRoute()
+
+const subIsActive = (input) => {
+	const paths = Array.isArray(input) ? input : [input]
+	return paths.some((path) => {
+		return route.path.indexOf(path) === 0
+	})
+}
+</script>
+
+<style lang="scss" scoped>
+.nav-links {
+	.page-links > a,
+	.page-links .page-link {
+		@apply flex items-center px-4 font-semibold text-white uppercase tracking-wide relative;
+
+		&:after {
+			content: '';
+			@apply absolute bg-primary bg-opacity-80 inset-x-0 bottom-0 h-0
+							transition-all duration-200 ease-in-out;
+			z-index: -1;
+			margin-bottom: -2px;
+		}
+
+		&.dropdown-parent.router-link-active:after,
+		&.router-link-exact-active:after {
+			height: 2px;
+		}
+
+		&:hover,
+		&:active {
+			&.dropdown-parent.router-link-active:after,
+			&:after {
+				height: calc(100% + 2px);
+			}
+		}
+	}
+
+	&--vertical {
+		.page-links {
+			@apply flex-col mb-4;
+		}
+
+		.page-links > a,
+		.page-links .page-link {
+			@apply py-4;
+
+			&:after {
+				top: 0;
+				right: initial;
+				height: auto;
+				width: 0;
+				margin-bottom: 0;
+				margin-left: -2px;
+			}
+
+			&.dropdown-parent.router-link-active:after,
+			&.router-link-exact-active:after {
+				height: auto;
+				width: 2px;
+			}
+
+			&:hover,
+			&:active {
+				&.dropdown-parent.router-link-active:after,
+				&:after {
+					width: calc(100% + 2px);
+				}
+			}
+		}
+
+		.nav-sub {
+			@apply flex-col;
+
+			.dropdown-parent {
+				@apply w-full;
+			}
+
+			&__links {
+				@apply w-auto;
+			}
+		}
+	}
+}
+
+.nav-sub {
+	@apply flex;
+
+	.dropdown-parent svg {
+		@apply ml-2 transition-transform duration-200 ease-in-out;
+	}
+	&.dropdown--active .dropdown-parent svg {
+		@apply rotate-180;
+	}
+
+	&__links {
+		@apply relative mt-2 bg-background rounded-sm max-w-full w-48 overflow-hidden;
+		box-shadow: 0 0 1px 1px rgb(255 255 255 / 20%);
+
+		> a {
+			@apply relative block p-4 text-white font-medium tracking-wide
+							transition-all duration-200 ease-in-out;
+
+			&:after {
+				content: '';
+				@apply absolute bg-primary left-full right-0 bottom-0
+								transition-all duration-200 ease-in-out;
+				height: 3px;
+			}
+
+			&:not(:last-child) {
+				@apply border-b border-secondary;
+
+				&:after {
+					bottom: -1px;
+				}
+			}
+
+			&.router-link-exact-active:after {
+				@apply left-0;
+			}
+
+			&:hover,
+			&:active {
+				@apply bg-secondary bg-opacity-75;
+			}
+		}
+	}
+}
+
+.social-links {
+	a {
+		@apply text-black text-opacity-70 bg-white bg-opacity-70 rounded-full p-2 transition-colors duration-200;
+		display: inherit;
+
+		svg {
+			@apply w-4;
+		}
+
+		&:hover,
+		&:active {
+			@apply bg-primary text-white;
+		}
+	}
+}
+</style>
