@@ -1,16 +1,16 @@
 <template>
 	<header class="intro">
-		<div class="hero-content relative z-30 flex h-full w-full flex-col">
-			<div class="flex flex-1 items-center justify-center px-4">
+		<div class="hero-content">
+			<div class="hero-content__inner">
 				<img
 					src="~/assets/img/meranthe_logo.png"
 					alt="Chronicles of Meranthe"
-					class="logo mx-auto w-full max-w-[45.36rem] sm:max-w-[51.84rem] md:max-w-[58.32rem]"
+					class="hero-logo__image"
 					width="1375"
 					height="688"
 				/>
 			</div>
-			<div class="flex justify-center px-4 pb-8">
+			<div class="hero-actions">
 				<NuxtLink to="/play/how-to" class="cta">Play Now</NuxtLink>
 			</div>
 		</div>
@@ -96,11 +96,31 @@ const toggleVideo = () => {
 	}
 }
 
-.logo {
+.hero-content {
+	@apply absolute inset-0 z-30;
+}
+
+.hero-content__inner {
+	@apply mx-auto flex h-full w-full max-w-screen-xl items-center justify-center px-4;
+}
+
+.hero-logo__image {
 	display: block;
-	background: rgba(0, 0, 0, 0.2);
-	box-shadow: 0 0 40px 30px rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
+	width: auto;
+	height: auto;
+	max-width: min(100%, 22rem);
+
+	@screen sm {
+		max-width: min(100%, 26rem);
+	}
+
+	@screen md {
+		max-width: min(100%, 29rem);
+	}
+}
+
+.hero-actions {
+	@apply absolute inset-x-0 bottom-0 flex justify-center pb-8;
 }
 
 .cta {
