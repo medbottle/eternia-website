@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const siteUrl = process.env.NUXT_SITE_URL || 'https://eternia-website.vercel.app'
+
 export default defineNuxtConfig({
 	compatibilityDate: '2025-05-15',
 	devtools: { enabled: true },
@@ -40,11 +42,17 @@ export default defineNuxtConfig({
 				},
 				{ name: 'format-detection', content: 'telephone=no' },
 				{ property: 'og:type', content: 'website' },
+				{ property: 'og:url', content: siteUrl },
+				{ property: 'og:title', content: 'Chronicles of Eternia' },
+				{
+					property: 'og:description',
+					content:
+						'Meranthe is a role-playing game and immersive sandbox where players build towns, craft items, govern society, and add to an ongoing fantasy story.',
+				},
 				{
 					property: 'og:image',
-					content: '/og.png',
+					content: `${siteUrl}/og.png`,
 				},
-				{ name: 'twitter:card', content: 'summary_large_image' },
 			],
 			link: [
 				{ rel: 'icon', type: 'image/png', href: '/icon.png' },
@@ -67,6 +75,7 @@ export default defineNuxtConfig({
 	},
 
 	site: {
+		url: siteUrl,
 		name: 'Chronicles of Eternia',
 	},
 
