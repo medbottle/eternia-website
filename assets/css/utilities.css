@@ -39,11 +39,4 @@
 		);
 	}
 
-	.debris-bg {
-		@media (min-width: 1500px) {
-			background:
-				url('~/assets/img/debris.webp') no-repeat center 300px,
-				url('~/assets/img/spaceman.webp') no-repeat calc(50% - 700px) top;
-		}
-	}
 }
