@@ -2,16 +2,18 @@
 	<header class="intro">
 		<div class="hero-content">
 			<div class="hero-content__inner">
-				<img
-					src="~/assets/img/meranthe_logo.png"
-					alt="Chronicles of Meranthe"
-					class="hero-logo__image"
-					width="1375"
-					height="688"
-				/>
-			</div>
-			<div class="hero-actions">
-				<NuxtLink to="/play/how-to" class="cta">Play Now</NuxtLink>
+				<div class="hero-logo">
+					<img
+						src="~/assets/img/meranthe_logo.png"
+						alt="Chronicles of Meranthe"
+						class="hero-logo__image"
+						width="1375"
+						height="688"
+					/>
+				</div>
+				<div class="hero-actions">
+					<NuxtLink to="/play/how-to" class="cta">Play Now</NuxtLink>
+				</div>
 			</div>
 		</div>
 		<template v-if="showVideo">
@@ -28,7 +30,7 @@
 			</video>
 			<button
 				type="button"
-				class="absolute bottom-2 right-4 z-10"
+				class="absolute bottom-2 right-4 z-40"
 				@click="toggleVideo"
 			>
 				<Icon
@@ -101,7 +103,11 @@ const toggleVideo = () => {
 }
 
 .hero-content__inner {
-	@apply mx-auto flex h-full w-full max-w-screen-xl items-center justify-center px-4;
+	@apply mx-auto flex h-full w-full max-w-screen-xl flex-col px-4;
+}
+
+.hero-logo {
+	@apply flex min-h-0 flex-1 items-center justify-center;
 }
 
 .hero-logo__image {
@@ -120,7 +126,7 @@ const toggleVideo = () => {
 }
 
 .hero-actions {
-	@apply absolute inset-x-0 bottom-0 flex justify-center pb-8;
+	@apply flex shrink-0 justify-center pb-8;
 }
 
 .cta {
