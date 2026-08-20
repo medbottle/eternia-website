@@ -6,7 +6,7 @@
 			<p class="flex items-center justify-center">
 				Copyright
 				<Icon name="fa6-solid:copyright" class="mx-2" />
-				{{ new Date().getFullYear() }} Pixel Realms
+				{{ new Date().getFullYear() }} - Pixel Realms
 			</p>
 		</div>
 	</footer>
