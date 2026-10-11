@@ -1,0 +1,87 @@
+
+RewriteOptions inherit
+
+#RewriteEngine on
+#RewriteCond %{HTTPS} off
+#RewriteRule ^ - [F,L]
+#RewriteCond %{QUERY_STRING} action=addsubscription [NC]
+#RewriteRule ^forum/usercp2\.php - [F,L]
+#RewriteCond %{HTTP_HOST} ^biylngsteel\.com [NC]
+#RewriteRule ^ - [F,L]
+
+RewriteCond %{HTTP_HOST} ^chronicles\-of\-esshar\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.chronicles\-of\-esshar\.com$
+RewriteRule ^/?$ "https\:\/\/chronicles\-of\-eternia\.com\/" [R=301,L]
+
+RewriteEngine On
+
+RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/w/index.php [L]
+
+RewriteCond %{HTTP_USER_AGENT} (GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|Bytespider|CCBot|PerplexityBot|Amazonbot|Meta-ExternalAgent|Meta-ExternalFetcher|Applebot-Extended|Diffbot|ImagesiftBot|Omgili|YouBot|cohere-ai|Timpibot|DuckAssistBot) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (SemrushBot|AhrefsBot|DotBot|MJ12bot|Barkrowler|BLEXBot|DataForSeoBot|SerpstatBot|SeznamBot|PetalBot|ZoominfoBot|MegaIndex|LinkpadBot|Sogou|YisouSpider) [NC]
+RewriteRule .* - [F,L]
+
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+deny from 74.7.227.143
+
+# BEGIN static homepage (eternia-website repo)
+ErrorDocument 404 /404.html
+
+# Caching applies to the homepage's own files only, so wiki/forum headers are untouched.
+# File names aren't versioned, so CSS/JS revalidate on every load (cheap 304s);
+# images, fonts and the hero video are cached for a week.
+<IfModule mod_headers.c>
+	<If "%{REQUEST_URI} =~ m#^/(css|js)/#">
+		Header set Cache-Control "no-cache"
+	</If>
+	<ElseIf "%{REQUEST_URI} =~ m#^/(img|fonts)/|^/hero\.mp4$#">
+		Header set Cache-Control "public, max-age=604800"
+	</ElseIf>
+</IfModule>
+# END static homepage
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 30
+   php_value max_input_vars 1000
+   php_value memory_limit 2048M
+   php_value post_max_size 1000M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php84"
+   php_value upload_max_filesize 2000M
+   php_flag zlib.output_compression Off
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 30
+   php_value max_input_vars 1000
+   php_value memory_limit 2048M
+   php_value post_max_size 1000M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php84"
+   php_value upload_max_filesize 2000M
+   php_flag zlib.output_compression Off
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^lore$ "https\:\/\/chronicles\-of\-eternia\.com\/wiki\/" [R=301,L]
+
+Redirect 301 /lore https://chronicles-of-eternia.com/wiki
+Redirect 301 /dmguide https://hackmd.io/@W-0Gbc7jSk-E0rjQlFUh3g/B1nSaTs_Gx
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php84” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php84 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
